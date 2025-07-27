@@ -1,1 +1,161 @@
+versioning:
+  - version: 1.0.0
+    status: Initial Release
+    date: 2025-07-01
+    description: Initial draft of the Vendor Portal test plan.
+  - version: 1.2.0
+    status: Current Release
+    date: 2025-08-05
+    description: Added smoke, sanity, retesting, and bug fix strategy. Removed CI/CD and automation references.
+
+project:
+  name: Vendor Portal
+  version: 1.2.0
+  release_date: 2025-08-05
+  description: >
+    The Vendor Portal is a centralized platform to manage third-party vendors, upload and maintain product catalogs, 
+    and use recommendation systems to drive user engagement and conversions.
+
+owner:
+  qa_lead: Shrawan 
+  product_manager: Nivedita 
+  dev_lead: Aman 
+
+features:
+  - Vendor Management
+  - Product Catalog
+  - Recommendation System (AI/ML-powered)
+  - User & Session Management
+  - API Layer
+  - Admin Dashboard
+
+test_types:
+  functional:
+    tools: ["Playwright", "Manual"]
+    description: Verify that core business features like vendor registration, catalog editing, and search work as expected.
+  api:
+    tools: ["Postman", "Python Requests"]
+    description: Validate RESTful endpoints, contracts, payloads, response structure, and authorization.
+  security:
+    tools: ["OWASP ZAP", "Burp Suite"]
+    description: Focus on OWASP Top 10, access controls, injection flaws, broken authentication, and session issues.
+  performance:
+    tools: ["Locust", "JMeter"]
+    description: Test throughput, latency, and resource limits for high-load scenarios.
+  integration:
+    tools: ["CI/CD Pipelines", "Test Data Injection"]
+    description: Ensure end-to-end data flow works with third-party integrations and async flows.
+  usability:
+    tools: ["Manual", "Heuristic Evaluation"]
+    description: UI/UX feedback and ease of use across roles and devices.
+  smoke:
+    tools: ["Manual", "Automated"]
+    description: Quick sanity check on main workflows post deployment.
+  sanity:
+    tools: ["Manual", "Automated"]
+    description: Validate critical functionalities after minor changes.
+  retesting:
+    tools: ["Manual", "Automated"]
+    description: Testing bug fixes or updated functionality.
+
+scope:
+  in_scope:
+    - Vendor onboarding and verification
+    - Product data ingestion, updates, deletions
+    - API validation and schema enforcement
+    - Recommendations display logic
+    - Admin-level approval flow
+    - Security validation (OAuth2, roles, access tokens)
+  out_of_scope:
+    - Internal ERP system integration
+    - Financial reconciliation logic
+    - Vendor payout mechanisms
+
+entry_criteria:
+  - Test environments are set up and stable
+  - API keys and credentials are shared
+  - Backend and UI deployments are completed
+  - User stories are marked “Ready for QA” in JIRA
+  - All test data seeded successfully
+
+exit_criteria:
+  - All functional and regression suites have passed
+  - No open Sev 1 or Sev 2 defects
+  - Release checklist is 100% complete
+  - Final sign-offs from QA, Product, and Dev
+  - Performance benchmarks met or improved
+  - Security vulnerabilities closed or waived by Security Lead
+
+test_deliverables:
+  - Master Test Plan
+  - Test Scenarios & Test Case Documents
+  - Automation Scripts (UI/API)
+  - Defect Logs
+  - Test Summary Report
+  - Sign-off Document
+
+test_cases:
+  vendor_management:
+    - Register new vendor with documents
+    - Edit business details and reverify
+    - Categorize vendor with tags
+  product_catalog:
+    - Upload product sheet via UI
+    - Bulk API upload with validations
+    - Version rollback for invalid data
+  recommendations:
+    - AI engine integration
+    - Relevant product suggestions based on history
+    - Feedback loop accuracy test
+
+test_scenarios:
+  - scenario: End-to-end Vendor Onboarding
+    description: New vendor registration through UI → Verification → Catalog Upload
+  - scenario: API-based Product Upload
+    description: Use API to upload product → validate schema → validate visibility
+
+dependencies:
+  - name: Azure Blob Storage
+    purpose: Product image storage
+  - name: Recommendation API (v2)
+    purpose: ML model for product suggestions
+
+release_checklist:
+  - "[ ] Unit Tests Passed (Dev)"
+  - "[ ] Functional Tests Passed (QA)"
+  - "[ ] Smoke Tests Passed"
+  - "[ ] Sanity Tests Passed"
+  - "[ ] Retesting Completed for Bug Fixes"
+  - "[ ] All Sev 1/2 Bugs Closed"
+  - "[ ] API Postman Collections Updated"
+  - "[ ] Performance Report Attached"
+  - "[ ] Final Regression Summary Shared"
+  - "[ ] Approved by QA, Product, Dev"
+  - "[ ] Release Notes Reviewed & Attached"
+
+risk_management:
+  - risk: "Large data uploads timeout during catalog import"
+    mitigation: "Add async upload + pagination + background retry"
+  - risk: "Broken integration with recommendation engine"
+    mitigation: "Stubbed test mode with real-time monitoring and retry mechanism"
+
+bug_fix_strategy:
+  critical_bugs:
+    - Fix within 1 working day
+    - Re-test full impacted flows
+  minor_bugs:
+    - Schedule for next sprint release
+    - Include in regression test pack
+  blocker_policy:
+    - No deployment if blocker bugs open
+
+approvers:
+  - name: Shrawan Dutta
+    role: QA Lead
+  - name: Aman Oberai
+    role: Dev Lead
+  - name: Nivedita Arora
+    role: Product Manager
+  - name: Ishant Singh
+    role: CIO
 
