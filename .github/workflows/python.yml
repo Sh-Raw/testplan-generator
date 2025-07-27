@@ -1,15 +1,6 @@
-name: TestPlan Generator CI
-
-on:
-  push:
-    branches: [ main ]
-  pull_request:
-    branches: [ main ]
-
 jobs:
   generate-testplan:
     runs-on: ubuntu-latest
-
     steps:
     - name: Checkout repository
       uses: actions/checkout@v3
@@ -28,7 +19,7 @@ jobs:
       run: python gen_testplan.py
 
     - name: Upload generated test plan artifact
-      uses: actions/upload-artifact@v3
+      uses: actions/upload-artifact@v4
       with:
         name: testplan-output
         path: output/
