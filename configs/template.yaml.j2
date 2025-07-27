@@ -1,0 +1,154 @@
+# Test Plan Document
+
+## 1. Versioning
+{% for v in versioning %}
+**Version:** {{ v.version }}  
+**Status:** {{ v.status }}  
+**Date:** {{ v.date }}  
+**Description:** {{ v.description }}
+
+{% endfor %}
+
+---
+
+## 2. Project Details
+**Project Name:** {{ project.name }}  
+**Version:** {{ project.version }}  
+**Release Date:** {{ project.release_date }}  
+**Description:** {{ project.description }}
+
+---
+
+## 3. Owner
+- **QA Lead:** {{ owner.qa_lead }}
+- **Product Manager:** {{ owner.product_manager }}
+- **Dev Lead:** {{ owner.dev_lead }}
+
+---
+
+## 4. Features
+{% for feature in features %}
+- {{ feature }}
+{% endfor %}
+
+---
+
+## 5. Test Types
+{% for type, details in test_types.items() %}
+**{{ type | capitalize }}**  
+Tools: {{ details.tools | join(', ') }}  
+Description: {{ details.description }}
+
+{% endfor %}
+
+---
+
+## 6. Scope
+
+**In Scope:**  
+{% for item in scope.in_scope %}
+- {{ item }}
+{% endfor %}
+
+**Out of Scope:**  
+{% for item in scope.out_of_scope %}
+- {{ item }}
+{% endfor %}
+
+---
+
+## 7. Entry Criteria
+{% for c in entry_criteria %}
+- {{ c }}
+{% endfor %}
+
+---
+
+## 8. Exit Criteria
+{% for c in exit_criteria %}
+- {{ c }}
+{% endfor %}
+
+---
+
+## 9. Test Deliverables
+{% for d in test_deliverables %}
+- {{ d }}
+{% endfor %}
+
+---
+
+## 10. Test Cases
+
+**Vendor Management**  
+{% for c in test_cases.vendor_management %}
+- {{ c }}
+{% endfor %}
+
+**Product Catalog**  
+{% for c in test_cases.product_catalog %}
+- {{ c }}
+{% endfor %}
+
+**Recommendations**  
+{% for c in test_cases.recommendations %}
+- {{ c }}
+{% endfor %}
+
+---
+
+## 11. Test Scenarios
+{% for s in test_scenarios %}
+**{{ s.scenario }}**  
+{{ s.description }}
+
+{% endfor %}
+
+---
+
+## 12. Dependencies
+{% for dep in dependencies %}
+- **{{ dep.name }}**: {{ dep.purpose }}
+{% endfor %}
+
+---
+
+## 13. Release Checklist
+{% for item in release_checklist %}
+- {{ item }}
+{% endfor %}
+
+---
+
+## 14. Risk Management
+{% for risk in risk_management %}
+- **Risk:** {{ risk.risk }}  
+  **Mitigation:** {{ risk.mitigation }}
+
+{% endfor %}
+
+---
+
+## 15. Bug Fix Strategy
+
+**Critical Bugs**  
+{% for bug in bug_fix_strategy.critical_bugs %}
+- {{ bug }}
+{% endfor %}
+
+**Minor Bugs**  
+{% for bug in bug_fix_strategy.minor_bugs %}
+- {{ bug }}
+{% endfor %}
+
+**Blocker Policy**  
+{% for policy in bug_fix_strategy.blocker_policy %}
+- {{ policy }}
+{% endfor %}
+
+---
+
+## 16. Approvers
+{% for approver in approvers %}
+- {{ approver.name }} ({{ approver.role }})
+{% endfor %}
